@@ -24,7 +24,7 @@ def solve(puzzle_input):
     lines = puzzle_input.splitlines()
 
     for line in lines:
-        levels = [int(y) for y in line.split(" ")]
+        levels = [int(y) for y in line.split()]
 
         if is_report_safe(levels):
             answer += 1
