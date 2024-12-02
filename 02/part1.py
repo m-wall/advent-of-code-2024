@@ -1,4 +1,4 @@
-def is_level_safe(levels):
+def is_report_safe(levels):
 
     direction = None
 
@@ -26,7 +26,7 @@ def solve(puzzle_input):
     for line in lines:
         levels = [int(y) for y in line.split(" ")]
 
-        if is_level_safe(levels):
+        if is_report_safe(levels):
             answer += 1
     
     return answer

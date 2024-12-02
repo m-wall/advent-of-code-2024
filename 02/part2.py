@@ -1,4 +1,4 @@
-def is_level_safe(levels):
+def is_report_safe(levels):
 
     direction = None
 
@@ -19,7 +19,6 @@ def is_level_safe(levels):
 
     return True
 
-
 def solve(puzzle_input):
     answer = 0
     lines = puzzle_input.splitlines()
@@ -30,7 +29,7 @@ def solve(puzzle_input):
         for i in range(len(levels)):
             levels_copy = levels.copy()
             levels_copy.pop(i)
-            if is_level_safe(levels_copy):
+            if is_report_safe(levels_copy):
                 answer += 1
                 break
 
