@@ -3,6 +3,8 @@ import os
 import requests
 import shutil
 
+from jinja2 import Environment, FileSystemLoader
+
 def create_from_template(day: int):
     padded_day = f"{day:02d}"
     template_folder = "template"
@@ -10,10 +12,14 @@ def create_from_template(day: int):
     if not os.path.exists(padded_day):
         os.makedirs(padded_day)
 
-        for file_name in os.listdir(template_folder):
-            source_file = os.path.join(template_folder, file_name)
-            destination_file = os.path.join(padded_day, file_name)
-            shutil.copy2(source_file, destination_file)
+        env = Environment(loader=FileSystemLoader(template_folder))
+        template = env.get_template("test.py.jinja")
+        output = template.render(day=padded_day)
+        with open(f"{padded_day}/test_day_{padded_day}.py", 'w') as f:
+            f.write(output)
+
+        shutil.copy2(f"{template_folder}/part1.py", f"{padded_day}/day_{padded_day}_part1.py")
+        shutil.copy2(f"{template_folder}/part2.py", f"{padded_day}/day_{padded_day}_part2.py")
 
 
 def download_aoc_input(day: int):
