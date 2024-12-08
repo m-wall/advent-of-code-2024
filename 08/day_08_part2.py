@@ -1,5 +1,3 @@
-import math
-
 def get_antenna_locations(matrix):
     locations = {}
     for r, row in enumerate(matrix):
@@ -31,11 +29,8 @@ def get_antinodes_for_antenna_type(locations, matrix):
             dr = r2 - r1
             dc = c2 - c1
 
-            # Extend out in one direction fom first location
+            # Extend out in both directions fom first location
             antinodes.extend(extend_line(loc_1, (dr, dc), matrix))
-
-            # Extend out in other direction fom first location
-            # Using first location and not loc_2 as we want everything inbetween too
             antinodes.extend(extend_line(loc_1, (dr * -1, dc * -1), matrix))
 
     return antinodes

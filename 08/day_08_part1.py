@@ -1,5 +1,3 @@
-import math
-
 def get_antenna_locations(matrix):
     locations = {}
     for r, row in enumerate(matrix):
@@ -28,10 +26,8 @@ def get_antinodes_for_antenna_type(locations, matrix):
             loc_4 = ((r2 + dr), (c2 + dc))
 
             # Check and add only if in bounds
-            if is_inbounds(loc_3, matrix):
-                antinodes.append(loc_3)
-            if is_inbounds(loc_4, matrix):
-                antinodes.append(loc_4)
+            if is_inbounds(loc_3, matrix): antinodes.append(loc_3)
+            if is_inbounds(loc_4, matrix): antinodes.append(loc_4)
 
     return antinodes
 
