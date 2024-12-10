@@ -1,5 +1,3 @@
-from heapq import heappush, heappop
-
 DIRECTIONS = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 
 def is_inbounds(position, matrix):
@@ -21,12 +19,10 @@ def get_valid_neighbours(current_position, previous_position, matrix):
 
 def get_num_paths_for_trail_head(start, matrix):
     target_seen = 0
-    path_queue = []
-
-    heappush(path_queue, (start, start))    # Tuple: current_position, previous_position
+    path_queue = [(start, start)]
 
     while path_queue:
-        current_position, previous_position = heappop(path_queue)
+        current_position, previous_position = path_queue.pop()
         current_value = matrix[current_position[0]][current_position[1]]
         
         if current_value == 9:
@@ -34,7 +30,7 @@ def get_num_paths_for_trail_head(start, matrix):
 
         neighbours = get_valid_neighbours(current_position, previous_position, matrix)
         for neighbour in neighbours:
-            heappush(path_queue, (neighbour, current_position))
+            path_queue.append((neighbour, current_position))
 
     return target_seen
 
