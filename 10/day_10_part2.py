@@ -7,24 +7,19 @@ def is_inbounds(position, matrix):
 
 def get_valid_neighbours(current_position, previous_position, matrix):
     neighbours = []
-
     current_value = matrix[current_position[0]][current_position[1]]
 
     for direction in DIRECTIONS:
-        r , c = current_position[0] + direction[0], current_position[1] + direction[1]
-        next_position = (r, c)
-
+        next_position = (current_position[0] + direction[0], current_position[1] + direction[1])
         if not is_inbounds(next_position, matrix): continue
         if next_position == previous_position: continue
-
         next_value = matrix[next_position[0]][next_position[1]]
-        if next_value == current_value + 1:
-            neighbours.append(next_position)
+        if next_value != current_value + 1: continue
+        neighbours.append(next_position)
 
     return neighbours
 
 def get_num_paths_for_trail_head(start, matrix):
-
     target_seen = 0
     path_queue = []
 
@@ -32,8 +27,8 @@ def get_num_paths_for_trail_head(start, matrix):
 
     while path_queue:
         current_position, previous_position = heappop(path_queue)
-
         current_value = matrix[current_position[0]][current_position[1]]
+        
         if current_value == 9:
             target_seen += 1
 
