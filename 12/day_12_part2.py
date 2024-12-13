@@ -43,14 +43,44 @@ def find_all_garden_plots(matrix):
 
     return plots
 
-def plot_perimeter(plot):
-    perimeter = 0
-    for position in plot:
-        perimeter += 4
-        for neighbour in get_neighbours(position):
-            if neighbour in plot:
-                perimeter -= 1
-    return perimeter
+def rotate_plot(plot):
+    max_r = max(r for r, _ in plot)
+    rotated_squares = set()
+    for r, c in plot:
+        new_r = c
+        new_c = max_r - r 
+        rotated_squares.add((new_r, new_c))
+    return rotated_squares
+
+def get_row_sides(plot, matrix):
+    sides = 0
+    for r in range(len(matrix)):
+        on_upper_edge, on_lower_edge = False, False
+        for c in range(len(matrix[0])):
+            if (r, c) not in plot:
+                on_upper_edge, on_lower_edge = False, False
+                continue
+            up = (r - 1, c)
+            if up not in plot and not on_upper_edge:
+                sides += 1
+                on_upper_edge = True
+            elif up in plot:
+                on_upper_edge = False
+
+            down = (r + 1, c)
+            if down not in plot and not on_lower_edge:
+                sides += 1
+                on_lower_edge = True
+            elif down in plot:
+                on_lower_edge = False
+    return sides
+
+def plot_sides(plot, matrix):
+    sides = 0
+    sides += get_row_sides(plot, matrix)
+    plot = rotate_plot(plot)
+    sides += get_row_sides(plot, matrix)
+    return sides
 
 def solve(puzzle_input):
     answer = 0
@@ -58,7 +88,7 @@ def solve(puzzle_input):
     matrix = [[char for char in line] for line in lines]
 
     for plot in find_all_garden_plots(matrix):
-        answer += (plot_perimeter(plot) * len(plot))
+        answer += (plot_sides(plot, matrix) * len(plot))
     return answer
 
 if __name__ == '__main__':
