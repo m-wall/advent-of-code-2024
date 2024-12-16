@@ -47,7 +47,7 @@ def solve(puzzle_input, n_rows, n_cols, seconds):
             highest_quadrant_count = loop_max
             highest_final_positions = final_positions
 
-    grid.print_grid(highest_final_positions, n_rows, n_cols)
+    grid.print_coordinates_into_grid(highest_final_positions, n_rows, n_cols)
     return highest_loop
 
 
