@@ -1,25 +1,22 @@
 from pathlib import Path
 
-import pytest
-
 current_dir = Path(__file__).parent.resolve()
 
 
 def test_part_1():
-    from aoc.d{{ day }} import part1
+    from aoc.d18 import part1
 
     with open(current_dir / "sample1.txt", "r", encoding="utf-8") as file:
         sample1 = file.read()
-    assert part1.solve(sample1) == 0
+    assert part1.solve(sample1, 12, 6) == 22
 
 
-@pytest.mark.skip
 def test_part_2():
-    from aoc.d{{ day }} import part2
+    from aoc.d18 import part2
 
     with open(current_dir / "sample1.txt", "r", encoding="utf-8") as file:
         sample1 = file.read()
-    assert part2.solve(sample1) == 0
+    assert part2.solve(sample1, 6) == "6,1"
 
 
 if __name__ == "__main__":
