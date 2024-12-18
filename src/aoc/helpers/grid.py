@@ -70,7 +70,7 @@ def print_coordinates_into_grid(coordinates: Tuple[int, int], max_row=None, max_
         max_row = max(row for row, _ in coordinates)
     if not max_col:
         max_col = max(col for _, col in coordinates)
-    matrix = [["."] * (max_col) for _ in range(max_row)]
+    matrix = [["."] * (max_col + 1) for _ in range(max_row + 1)]
     for row, col in coordinates:
         matrix[row][col] = fill_char
     print_grid(matrix)
