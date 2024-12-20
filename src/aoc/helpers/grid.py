@@ -28,6 +28,10 @@ def is_in_grid_bounds(position: Tuple[int, int], matrix: List[List[T]]) -> bool:
     return 0 <= position[0] < len(matrix) and 0 <= position[1] < len(matrix[0])
 
 
+def is_edge(position: Tuple[int, int], matrix: List[List[T]]) -> bool:
+    return position[0] == 0 or position[0] == len(matrix) - 1 or position[1] == 0 or position[1] == len(matrix[0]) - 1
+
+
 def get_neighbours(position: Tuple[int, int], directions: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
     return [(position[0] + direction[0], position[1] + direction[1]) for direction in directions]
 
