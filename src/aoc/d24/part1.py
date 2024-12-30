@@ -17,7 +17,7 @@ def solve(puzzle_input):
     values = {wire.split(": ")[0]: int(wire.split(": ")[1]) for wire in wires.split("\n")}
     connections = [connection.replace("-> ", "").split(" ") for connection in connections.strip().split("\n")]
 
-    z_count = sum(1 for x, y, z, wire in connections if wire.startswith("z"))
+    z_count = sum(1 for x, y, op, r in connections if r.startswith("z"))
 
     while len([key for key in values.keys() if key.startswith("z")]) != z_count:
         for a, op, b, result in connections:
